@@ -33,6 +33,14 @@ class App
             ";
 
     }
+
+    function show_footer()
+    {
+        print "
+    </body>
+    </html>
+    ";
+    }
 }
 
 ?>
