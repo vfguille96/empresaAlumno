@@ -42,9 +42,15 @@ $app->show_head_register("Registro");
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Nombre y apellidos:</label>
+                    <label for="name">Nombre:</label>
                     <input type="text" maxlength="100" class="form-control" id="name" placeholder="Introduce tu nombre"
                            name="name" required="required"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Apellidos:</label>
+                    <input type="text" maxlength="100" class="form-control" id="surname" placeholder="Introduce tu apellido"
+                           name="surname" required="required"/>
                 </div>
 
                 <div class="form-group">
@@ -86,9 +92,15 @@ $app->show_head_register("Registro");
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Nombre y apellidos:</label>
+                    <label for="name">Nombre:</label>
                     <input type="text" maxlength="100" class="form-control" id="name" placeholder="Introduce tu nombre"
                            name="name" required="required"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Apellidos:</label>
+                    <input type="text" maxlength="100" class="form-control" id="surname" placeholder="Introduce tu apellido"
+                           name="surname" required="required"/>
                 </div>
 
                 <div class="form-group">
@@ -123,17 +135,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $password = $_POST['password'];
     $passwordAgain = $_POST['passwordAgain'];
+    $rbAlumnoEmpresa = $_POST['radio'];
+
+    echo "<span>You have selected :<b> ".$rbAlumnoEmpresa."</b></span>";
 
     if ($password == $passwordAgain)
     {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $name = $_POST['name'];
+        $surname = $_POST['surname'];
         $promoA = $_POST['desdeEmpresa'];
 
         if (!$app->getDao()->isConnected()) {
             echo "<p>" . $app->getDao()->error . "</p>";
-        } elseif ($app->getDao()->addUser($username, $password, $name, $promoA, $email)) {
+        } elseif ($app->getDao()->addAlumno($username, $password, $name, $surname, $promoA, $email, 1)) {
             echo "<script language=\"javascript\">window.location.href=\"login.php\"</script>";
         } else {
             echo "<h3>Error en la base de datos.</h3>";
