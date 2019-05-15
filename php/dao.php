@@ -92,7 +92,6 @@ class Dao
                     return false;
                 }
             }
-
         } catch (PDOException $e) {
             $this->error = "Error: " . $this->$e->getMessage();
             echo $this->error;
@@ -115,7 +114,6 @@ class Dao
                     return false;
                 }
             }
-
         } catch (PDOException $e) {
             $this->error = "Error: " . $this->$e->getMessage();
             echo $this->error;
@@ -145,8 +143,6 @@ class Dao
             return false;
         }
     }
-
-
 }
 
 ?>

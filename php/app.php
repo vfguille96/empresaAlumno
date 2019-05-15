@@ -19,11 +19,11 @@ class App
     {
         print " <!DOCTYPE html>
         <html lang=\"es\">
-            <head>
+            <br>
                 <meta charset=\"utf-8\"/>
                 <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
                 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-                <title>" . $titulo . "</title>
+                </br><title>" . $titulo . "</title>
                 <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css\">
                 <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
                 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js\"></script>
@@ -35,9 +35,35 @@ class App
 
     }
 
+    function show_head_register($titulo)
+    {
+        print " <!DOCTYPE html>
+        <html lang=\"es\">
+            <head class='bg-primary'>
+                <meta charset=\"utf-8\"/>
+                <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+                </br><title>" . $titulo . "</title>
+                <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css\">
+                <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
+                <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js\"></script>
+                <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js\"></script>
+                <script src=\"../js/displayForm.js\"></script>
+                <script type=\"text/javascript\">
+        function hideOne() {
+            document.getElementById('div3').style.display = 'none';
+        }
+        window.onload = hideOne;
+        </script>
+            </head>
+            <body>
+            ";
+
+    }
+
     function menu()
     {
-        echo '<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        echo '<nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <a class="navbar-brand" href="home.php">Inicio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -83,8 +109,8 @@ class App
 
     function menu_register()
     {
-        echo '<nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="login.php">Inicio de sesión</a>
+        echo '<nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+            <a class="navbar-brand text-light" href="login.php">Inicio de sesión</a>
         </nav>';
     }
 }
