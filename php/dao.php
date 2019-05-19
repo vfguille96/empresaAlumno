@@ -84,7 +84,7 @@ class Dao
                 echo '<h3>ERROR: Ya existe un usuario en la base de datos.</h3>';
                 return false;
             } else {
-                $sql = "INSERT INTO `" . TABLE_ALUMNOS . "` (`" . COLUMN_ALU_USUARIO . "`, `" . COLUMN_ALU_CLAVE . "`, `" . COLUMN_ALU_NOMBRE . "`, `" . COLUMN_ALU_APELLIDOS . "`, `" . COLUMN_ALU_PROMOCION . "`, `" . COLUMN_ALU_EMAIL . "`, `" . COLUMN_ALU_ESTADO . "`, `" . COLUMN_ALU_NOMBRE_EMPRESA . "`, `" . COLUMN_ALU_DESDE_EMPRESA . "`) VALUES ('" . $usuario . "', '" . sha1($clave) . "', '" . $nombre . "', '" . $apellidos . "', '" . $promocion . "' , '" . $email . "', '" . $estado . "')";
+                $sql = "INSERT INTO `" . TABLE_ALUMNOS . "` (`" . COLUMN_ALU_USUARIO . "`, `" . COLUMN_ALU_CLAVE . "`, `" . COLUMN_ALU_NOMBRE . "`, `" . COLUMN_ALU_APELLIDOS . "`, `" . COLUMN_ALU_PROMOCION . "`, `" . COLUMN_ALU_EMAIL . "`, `" . COLUMN_ALU_ESTADO . "`) VALUES ('" . $usuario . "', '" . sha1($clave) . "', '" . $nombre . "', '" . $apellidos . "', '" . $promocion . "' , '" . $email . "', '" . $estado . "')";
                 $this->conn->exec($sql);
                 if ($this->validateAlumno($usuario, $clave)) {
                     return true;
