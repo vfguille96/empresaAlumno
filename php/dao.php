@@ -142,6 +142,25 @@ class Dao
             return false;
         }
     }
-}
 
+    function validateUserE($user, $password){
+        $sql = "SELECT * FROM " . TABLE_EMPRESA . " WHERE " . COLUMN_EMPRESA_USUARIO . "='" . $user . "' AND " . COLUMN_EMPRESA_CLAVE . "=sha1('" . $password . "')";
+        // Ejecutar la sentencia del objeto PDO
+        $statement = $this->conn->query($sql);
+        if ($statement->rowCount() == 1)
+            return true;
+        else
+            return false;
+    }
+
+    function validateUserA($user, $password){
+        $sql = "SELECT * FROM " . TABLE_ALUMNOS . " WHERE " . COLUMN_ALU_USUARIO . "='" . $user . "' AND " . COLUMN_ALU_CLAVE . "=sha1('" . $password . "')";
+        // Ejecutar la sentencia del objeto PDO
+        $statement = $this->conn->query($sql);
+        if ($statement->rowCount() == 1)
+            return true;
+        else
+            return false;
+    }
+}
 ?>

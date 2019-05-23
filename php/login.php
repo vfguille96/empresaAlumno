@@ -50,7 +50,13 @@ if($_SERVER['REQUEST_METHOD']=="POST")
         {
             echo "<p>".$app->getDao()->error."</p>";
 
-        }elseif($app->getDao()->validateUser($user,$password)){
+        }elseif($app->getDao()->validateUserA($user,$password)){
+            // Se guarda la sesión de usuario
+            $app->init_session($user);
+            // Se redirecciona a la página principal
+            echo "<script language=\"javascript\">window.location.href=\"home.php\"</script>";
+        }
+        elseif($app->getDao()->validateUserE($user,$password)){
             // Se guarda la sesión de usuario
             $app->init_session($user);
             // Se redirecciona a la página principal

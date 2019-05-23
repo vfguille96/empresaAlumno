@@ -15,6 +15,17 @@ class App
         return $this->dao;
     }
 
+    /**
+     * Función que guarda el nombre de usuario en la variable $SESSION
+     * cuando el usuario se ha logueado (login.php)
+     */
+    function init_session($user)
+    {
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['user'] = $user;
+        }
+    }
+
     function show_head($titulo)
     {
         print " <!DOCTYPE html>

@@ -21,7 +21,7 @@ $app->show_head_register("Registro");
                 <div class="form-group">
                     <label for="username">Usuario:</label>
                     <input type="text" maxlength="30" class="form-control" id="username"
-                           placeholder="Introduce tu nombre de usuario" name="username" required="required"/>
+                           placeholder="Nombre de usuario" name="username" required="required"/>
                 </div>
 
                 <div class="form-group">
@@ -42,26 +42,30 @@ $app->show_head_register("Registro");
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Nombre:</label>
-                    <input type="text" maxlength="100" class="form-control" id="name" placeholder="Introduce tu nombre"
-                           name="name" required="required"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="name">Apellidos:</label>
-                    <input type="text" maxlength="100" class="form-control" id="surname"
-                           placeholder="Introduce tu apellido"
-                           name="surname" required="required"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="promo">Año de la promoción:</label>
-                    <input type="number" min="1900" step="1" class="form-control" id="promoE" name="promoE"
+                    <label for="promo">Teléfono:</label>
+                    <input type="number" class="form-control" placeholder="Teléfono" id="telefonoE" name="telefonoE"
                            required="required"/>
                 </div>
+
+                <div class="form-group">
+                    <label for="name">Nombre de la empresa:</label>
+                    <input type="text" maxlength="100" class="form-control" id="nombreEmpresaE" placeholder="Introduce el nombre de la empresa"
+                           name="nombreEmpresaE" required="required"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Dirección empresa:</label>
+                    <input type="text" maxlength="100" class="form-control" id="direccionEmpresa"
+                           placeholder="Dirección de la empresa"
+                           name="direccionEmpresa" required="required"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Nombre persona de contacto:</label>
+                    <input type="text" maxlength="100" class="form-control" id="nombreContactoE" placeholder="Nombre persona de contacto"
+                           name="nombreContactoE" required="required"/>
+                </div>
                 <p></p>
-
-
             </div>
 
 
@@ -70,31 +74,31 @@ $app->show_head_register("Registro");
 
                 <div class="form-group">
                     <label for="username">Usuario:</label>
-                    <input type="text" maxlength="30" class="form-control" id="username"
-                           placeholder="Introduce tu nombre de usuario" name="username" required="required"/>
+                    <input type="text" maxlength="30" class="form-control" id="usernameA"
+                           placeholder="Introduce tu nombre de usuario" name="usernameA" required="required"/>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Contraseña:</label>
-                    <input type="password" maxlength="30" class="form-control" id="password" placeholder="Contraseña"
-                           name="password" required="required"/>
+                    <input type="password" maxlength="30" class="form-control" id="passwordA" placeholder="Contraseña"
+                           name="passwordA" required="required"/>
                 </div>
                 <div class="form-group">
                     <label for="passwordAgain">Confirmacion de Contraseña:</label>
-                    <input type="password" maxlength="100" class="form-control" id="passwordAgain"
-                           placeholder="Confime la contraseña" name="passwordAgain" required="required"/>
+                    <input type="password" maxlength="100" class="form-control" id="passwordAgainA"
+                           placeholder="Confime la contraseña" name="passwordAgainA" required="required"/>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="text" maxlength="30" class="form-control" id="email"
-                           placeholder="Introduce tu correo electronico" name="email" required="required"/>
+                    <input type="text" maxlength="30" class="form-control" id="emailA"
+                           placeholder="Introduce tu correo electronico" name="emailA" required="required"/>
                 </div>
 
                 <div class="form-group">
                     <label for="name">Nombre:</label>
-                    <input type="text" maxlength="100" class="form-control" id="name" placeholder="Introduce tu nombre"
-                           name="name" required="required"/>
+                    <input type="text" maxlength="100" class="form-control" id="nameA" placeholder="Introduce tu nombre"
+                           name="nameA" required="required"/>
                 </div>
 
                 <div class="form-group">
@@ -106,14 +110,14 @@ $app->show_head_register("Registro");
 
                 <div class="form-group">
                     <label for="promo">Año de la promoción:</label>
-                    <input ttype="number" min="1900" step="1" class="form-control" id="desdeEmpresa" name="desdeEmpresa"
+                    <input type="number" min="1900" step="1" class="form-control" id="promocion" name="promocion"
                            required="required"/>
                 </div>
 
                 <p>Estado laboral:</p>
-                <input type="radio" name="tab" value="igotnone" onclick="show1();"/>
+                <input type="radio" name="radioEstado" value="desempleado" onclick="show1();"/>
                 Desempleado
-                <input type="radio" name="tab" value="igottwo" onclick="show2();" checked="checked"/>
+                <input type="radio" name="radioEstado" value="empleado" onclick="show2();" checked="checked"/>
                 Empleado
                 <div id="div1" class="hide">
                     <hr>
@@ -131,55 +135,77 @@ $app->show_head_register("Registro");
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
-
         </form>
     </div>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    echo "wwwwwwwwwwwwwwwwwwwwwwwww";
+    echo "1.0";
 
+    $passwordA = $_POST['passwordA'];
+    $passwordAgainA = $_POST['passwordAgainA'];
     $password = $_POST['password'];
     $passwordAgain = $_POST['passwordAgain'];
+
     $rbAlumnoEmpresa = $_POST['radio'];
+    $radioEstado = $_POST['radioEstado'];
 
     echo "<span>You have selected :<b> " . $rbAlumnoEmpresa . "</b></span>";
 
-    if ($password == $passwordAgain) {
+    if ($password == $passwordAgain || $passwordA == $passwordAgainA) {
+        echo "1.1";
+        $usernameA = $_POST['usernameA'];
+        $emailA = $_POST['emailA'];
+        $nameA = $_POST['nameA'];
+        $surnameA= $_POST['surnameA'];
+        $promoA = $_POST['promocion'];
+        $nombreEmpresa = $_POST['nombreEmpresa'];
+        $tiempoEmpresa = $_POST['tiempoEmpresa'];
+        $direccionEmpresa = $_POST['direccionEmpresa'];
+        $nombreContactoE = $_POST['nombreContactoE'];
+        $telefonoE = $_POST['telefonoE'];
+        $nombreEmpresaE = $_POST['nombreEmpresaE'];
+
         $username = $_POST['username'];
         $email = $_POST['email'];
         $name = $_POST['name'];
         $surname = $_POST['surname'];
-        $promoA = $_POST['desdeEmpresa'];
+        $promoA = $_POST['promocion'];
 
-        if ($rbAlumnoEmpresa == "alumno" && $app->getDao()->isConnected()) {
-            if ($app->getDao()->addAlumno($username, $password, $name, $surname, $promoA, $email, 1)) {
+        if($app->getDao()->isConnected()){
+            echo "Hay conexion";
+        }
+
+        if ($rbAlumnoEmpresa == "alumno" && $app->getDao()->isConnected() && $radioEstado == "desempleado") {
+            echo "2";
+            if ($app->getDao()->addAlumno($usernameA, $password, $nameA, $surnameA, $promoA, $emailA, 1)) {
                 echo "<script language=\"javascript\">window.location.href=\"login.php\"</script>";
             } else {
                 echo "<h3>Error en la base de datos.</h3>";
             }
+        } elseif ($rbAlumnoEmpresa == "alumno" && $app->getDao()->isConnected() && $radioEstado == "empleado") {
+            echo "3";
+            if ($app->getDao()->addAlumnoNombreEmpresa($usernameA, $passwordA, $nameA, $surnameA, $promoA, $emailA, 1, $nombreEmpresa, $tiempoEmpresa)) {
+                echo "<script language=\"javascript\">window.location.href=\"login.php\"</script>";
+            } else {
+                echo "<h3>Error en la base de datos.</h3>";
+            }
+
         } elseif ($rbAlumnoEmpresa == "empresa" && $app->getDao()->isConnected()) {
-
-
+            echo "4";
+            if ($app->getDao()->addEmpresa($username, $password, $nombreEmpresaE, $email, $telefonoE, $direccionEmpresa, $nombreContactoE)) {
+                echo "<script language=\"javascript\">window.location.href=\"login.php\"</script>";
+            } else {
+                echo "<h3>Error en la base de datos.</h3>";
+            }
+        }else
+        {
+            echo "No se ha seleccionado ningún campo.";
         }
-
-
     } else {
         echo "<h3>Error en la conexión.</h3>";
     }
-
-
-    if (!$app->getDao()->isConnected()) {
-        echo "<p>" . $app->getDao()->error . "</p>";
-    } elseif ($app->getDao()->addAlumno($username, $password, $name, $surname, $promoA, $email, 1)) {
-        echo "<script language=\"javascript\">window.location.href=\"login.php\"</script>";
-    } else {
-        echo "<h3>Error en la base de datos.</h3>";
-    }
-} else {
-    echo "<h3>Las contraseñas no coinciden, vuelva a intentarlo.</h3>";
-}
 }
 $app->show_footer();
 ?>
