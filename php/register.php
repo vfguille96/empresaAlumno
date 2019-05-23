@@ -103,9 +103,9 @@ $app->show_head_register("Registro");
 
                 <div class="form-group">
                     <label for="name">Apellidos:</label>
-                    <input type="text" maxlength="100" class="form-control" id="surname"
+                    <input type="text" maxlength="100" class="form-control" id="surnameA"
                            placeholder="Introduce tu apellido"
-                           name="surname" required="required"/>
+                           name="surnameA" required="required"/>
                 </div>
 
                 <div class="form-group">
@@ -166,12 +166,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $nombreContactoE = $_POST['nombreContactoE'];
         $telefonoE = $_POST['telefonoE'];
         $nombreEmpresaE = $_POST['nombreEmpresaE'];
-
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $name = $_POST['name'];
-        $surname = $_POST['surname'];
-        $promoA = $_POST['promocion'];
 
         if($app->getDao()->isConnected()){
             echo "Hay conexion";
@@ -179,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if ($rbAlumnoEmpresa == "alumno" && $app->getDao()->isConnected() && $radioEstado == "desempleado") {
             echo "2";
-            if ($app->getDao()->addAlumno($usernameA, $password, $nameA, $surnameA, $promoA, $emailA, 1)) {
+            if ($app->getDao()->addAlumno($usernameA, $passwordA, $nameA, $surnameA, $promoA, $emailA, 1)) {
                 echo "<script language=\"javascript\">window.location.href=\"login.php\"</script>";
             } else {
                 echo "<h3>Error en la base de datos.</h3>";
@@ -194,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         } elseif ($rbAlumnoEmpresa == "empresa" && $app->getDao()->isConnected()) {
             echo "4";
-            if ($app->getDao()->addEmpresa($username, $password, $nombreEmpresaE, $email, $telefonoE, $direccionEmpresa, $nombreContactoE)) {
+            if ($app->getDao()->addEmpresa($username, $password, $nombreContactoE, $email, $telefonoE, $direccionEmpresa, $nombreEmpresaE)) {
                 echo "<script language=\"javascript\">window.location.href=\"login.php\"</script>";
             } else {
                 echo "<h3>Error en la base de datos.</h3>";
