@@ -21,49 +21,49 @@ $app->show_head_register("Registro");
                 <div class="form-group">
                     <label for="username">Usuario:</label>
                     <input type="text" maxlength="30" class="form-control" id="username"
-                           placeholder="Nombre de usuario" name="username" required="required"/>
+                           placeholder="Nombre de usuario" name="username" />
                 </div>
 
                 <div class="form-group">
                     <label for="password">Contraseña:</label>
                     <input type="password" maxlength="30" class="form-control" id="password" placeholder="Contraseña"
-                           name="password" required="required"/>
+                           name="password" />
                 </div>
                 <div class="form-group">
                     <label for="passwordAgain">Confirmacion de Contraseña:</label>
                     <input type="password" maxlength="100" class="form-control" id="passwordAgain"
-                           placeholder="Confime la contraseña" name="passwordAgain" required="required"/>
+                           placeholder="Confime la contraseña" name="passwordAgain" />
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="text" maxlength="30" class="form-control" id="email"
-                           placeholder="Introduce tu correo electronico" name="email" required="required"/>
+                           placeholder="Introduce tu correo electronico" name="email" />
                 </div>
 
                 <div class="form-group">
                     <label for="promo">Teléfono:</label>
                     <input type="number" class="form-control" placeholder="Teléfono" id="telefonoE" name="telefonoE"
-                           required="required"/>
+                           />
                 </div>
 
                 <div class="form-group">
                     <label for="name">Nombre de la empresa:</label>
                     <input type="text" maxlength="100" class="form-control" id="nombreEmpresaE" placeholder="Introduce el nombre de la empresa"
-                           name="nombreEmpresaE" required="required"/>
+                           name="nombreEmpresaE" />
                 </div>
 
                 <div class="form-group">
                     <label for="name">Dirección empresa:</label>
                     <input type="text" maxlength="100" class="form-control" id="direccionEmpresa"
                            placeholder="Dirección de la empresa"
-                           name="direccionEmpresa" required="required"/>
+                           name="direccionEmpresa" />
                 </div>
 
                 <div class="form-group">
                     <label for="name">Nombre persona de contacto:</label>
                     <input type="text" maxlength="100" class="form-control" id="nombreContactoE" placeholder="Nombre persona de contacto"
-                           name="nombreContactoE" required="required"/>
+                           name="nombreContactoE" />
                 </div>
                 <p></p>
             </div>
@@ -75,43 +75,43 @@ $app->show_head_register("Registro");
                 <div class="form-group">
                     <label for="username">Usuario:</label>
                     <input type="text" maxlength="30" class="form-control" id="usernameA"
-                           placeholder="Introduce tu nombre de usuario" name="usernameA" required="required"/>
+                           placeholder="Introduce tu nombre de usuario" name="usernameA" />
                 </div>
 
                 <div class="form-group">
                     <label for="password">Contraseña:</label>
                     <input type="password" maxlength="30" class="form-control" id="passwordA" placeholder="Contraseña"
-                           name="passwordA" required="required"/>
+                           name="passwordA" />
                 </div>
                 <div class="form-group">
                     <label for="passwordAgain">Confirmacion de Contraseña:</label>
-                    <input type="password" maxlength="100" class="form-control" id="passwordAgainA"
-                           placeholder="Confime la contraseña" name="passwordAgainA" required="required"/>
+                    <input type="password" maxlength="30" class="form-control" id="passwordAgainA"
+                           placeholder="Confime la contraseña" name="passwordAgainA" />
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="text" maxlength="30" class="form-control" id="emailA"
-                           placeholder="Introduce tu correo electronico" name="emailA" required="required"/>
+                           placeholder="Introduce tu correo electronico" name="emailA" />
                 </div>
 
                 <div class="form-group">
                     <label for="name">Nombre:</label>
                     <input type="text" maxlength="100" class="form-control" id="nameA" placeholder="Introduce tu nombre"
-                           name="nameA" required="required"/>
+                           name="nameA" />
                 </div>
 
                 <div class="form-group">
                     <label for="name">Apellidos:</label>
                     <input type="text" maxlength="100" class="form-control" id="surnameA"
                            placeholder="Introduce tu apellido"
-                           name="surnameA" required="required"/>
+                           name="surnameA" />
                 </div>
 
                 <div class="form-group">
                     <label for="promo">Año de la promoción:</label>
                     <input type="number" min="1900" step="1" class="form-control" id="promocion" name="promocion"
-                           required="required"/>
+                           />
                 </div>
 
                 <p>Estado laboral:</p>
@@ -141,20 +141,20 @@ $app->show_head_register("Registro");
 <?php
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    echo "1.0";
+    $rbAlumnoEmpresa = $_POST['radio'];
 
+    // Alumno
     $passwordA = $_POST['passwordA'];
     $passwordAgainA = $_POST['passwordAgainA'];
+    $radioEstado = $_POST['radioEstado'];
+
+    // Empresa
     $password = $_POST['password'];
     $passwordAgain = $_POST['passwordAgain'];
 
-    $rbAlumnoEmpresa = $_POST['radio'];
-    $radioEstado = $_POST['radioEstado'];
-
-    echo "<span>You have selected :<b> " . $rbAlumnoEmpresa . "</b></span>";
-
     if ($password == $passwordAgain || $passwordA == $passwordAgainA) {
-        echo "1.1";
+
+        // Alumno
         $usernameA = $_POST['usernameA'];
         $emailA = $_POST['emailA'];
         $nameA = $_POST['nameA'];
@@ -162,16 +162,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $promoA = $_POST['promocion'];
         $nombreEmpresa = $_POST['nombreEmpresa'];
         $tiempoEmpresa = $_POST['tiempoEmpresa'];
+
+        // Empresa
         $direccionEmpresa = $_POST['direccionEmpresa'];
         $nombreContactoE = $_POST['nombreContactoE'];
         $telefonoE = $_POST['telefonoE'];
         $nombreEmpresaE = $_POST['nombreEmpresaE'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-
-        if($app->getDao()->isConnected()){
-            echo "Hay conexion";
-        }
 
         if ($rbAlumnoEmpresa == "alumno" && $app->getDao()->isConnected() && $radioEstado == "desempleado") {
             echo "2";
