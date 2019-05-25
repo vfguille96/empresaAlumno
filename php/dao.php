@@ -143,7 +143,8 @@ class Dao
         }
     }
 
-    function validateUserE($user, $password){
+    function validateUserE($user, $password)
+    {
         $sql = "SELECT * FROM " . TABLE_EMPRESA . " WHERE " . COLUMN_EMPRESA_USUARIO . "='" . $user . "' AND " . COLUMN_EMPRESA_CLAVE . "=sha1('" . $password . "')";
         // Ejecutar la sentencia del objeto PDO
         $statement = $this->conn->query($sql);
@@ -153,7 +154,8 @@ class Dao
             return false;
     }
 
-    function validateUserA($user, $password){
+    function validateUserA($user, $password)
+    {
         $sql = "SELECT * FROM " . TABLE_ALUMNOS . " WHERE " . COLUMN_ALU_USUARIO . "='" . $user . "' AND " . COLUMN_ALU_CLAVE . "=sha1('" . $password . "')";
         // Ejecutar la sentencia del objeto PDO
         $statement = $this->conn->query($sql);
@@ -166,7 +168,7 @@ class Dao
     function getEmpresas()
     {
         try {
-            $sql = "select ".COLUMN_EMPRESA_NOMBRE. ", ".COLUMN_EMPRESA_DIRECCION. " from " .TABLE_EMPRESA;
+            $sql = "select " . COLUMN_EMPRESA_NOMBRE . ", " . COLUMN_EMPRESA_DIRECCION . " from " . TABLE_EMPRESA;
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -178,7 +180,7 @@ class Dao
     function getNombreApellidosEmailAlumnos()
     {
         try {
-            $sql = "select ".COLUMN_ALU_NOMBRE. ", ".COLUMN_ALU_APELLIDOS.  ", ".COLUMN_ALU_EMAIL. " from " .TABLE_ALUMNOS;
+            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS;
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -187,7 +189,8 @@ class Dao
         }
     }
 
-    function checkUserAlumno($user){
+    function checkUserAlumno($user)
+    {
         $sql = "SELECT * FROM " . TABLE_ALUMNOS . " WHERE " . COLUMN_ALU_USUARIO . "='" . $user . "'";
         // Ejecutar la sentencia del objeto PDO
         $statement = $this->conn->query($sql);
@@ -197,7 +200,8 @@ class Dao
             return false;
     }
 
-    function checkUserEmpresa($user){
+    function checkUserEmpresa($user)
+    {
         $sql = "SELECT * FROM " . TABLE_EMPRESA . " WHERE " . COLUMN_EMPRESA_USUARIO . "='" . $user . "'";
         // Ejecutar la sentencia del objeto PDO
         $statement = $this->conn->query($sql);
@@ -209,4 +213,5 @@ class Dao
 
 
 }
+
 ?>
