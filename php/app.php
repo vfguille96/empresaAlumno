@@ -124,6 +124,47 @@ class App
             <a class="navbar-brand text-light" href="login.php">Inicio de sesión</a>
         </nav>';
     }
+
+    function menu_home()
+    {
+        echo '<nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+            <a class="navbar-brand text-light" href="home.php">Inicio</a>
+            <ul class="nav navbar-nav navbar-right">
+          <form action="logout.php">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <input type="submit" value="Cerrar sesión" class="btn btn-primary"/>
+          </div>
+          </form>
+          </ul>
+        </nav>';
+    }
+
+    function invalidate_session()
+    {
+        if (isset($_SESSION['user'])) {
+            unset ($_SESSION['user']);
+        }
+        session_destroy();
+        $this->showLogin();
+    }
+
+    function showLogin()
+    {
+        header('Location: login.php');
+    }
+
+    function isLogged()
+    {
+        return isset($_SESSION['user']);
+    }
+
+    function validateSession()
+    {
+        session_start();
+        if (!$this->isLogged()) {
+            $this->showLogin();
+        }
+    }
 }
 
 ?>

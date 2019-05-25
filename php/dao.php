@@ -162,5 +162,37 @@ class Dao
         else
             return false;
     }
+
+    function getEmpresas()
+    {
+        try {
+            $sql = "select ".COLUMN_EMPRESA_NOMBRE. ",".COLUMN_EMPRESA_DIRECCION. " from " .TABLE_EMPRESA;
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
+    function checkUserAlumno($user){
+        $sql = "SELECT * FROM " . TABLE_ALUMNOS . " WHERE " . COLUMN_ALU_USUARIO . "='" . $user . "'";
+        // Ejecutar la sentencia del objeto PDO
+        $statement = $this->conn->query($sql);
+        if ($statement->rowCount() == 1)
+            return true;
+        else
+            return false;
+    }
+
+    function checkUserEmpresa($user){
+        $sql = "SELECT * FROM " . TABLE_EMPRESA . " WHERE " . COLUMN_EMPRESA_USUARIO . "='" . $user . "'";
+        // Ejecutar la sentencia del objeto PDO
+        $statement = $this->conn->query($sql);
+        if ($statement->rowCount() == 1)
+            return true;
+        else
+            return false;
+    }
 }
 ?>
