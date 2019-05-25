@@ -2,10 +2,10 @@
 include_once 'app.php';
 $app = new App();
 $app->validateSession();
-$app->menu_home();
 $app->show_head("Inicio");
+$app->menu();
 $username = $_SESSION['user'];
-
+echo '</br>';
 echo '<h2 class="text-center">Bienvenido, ' . $username . '.</h2>';
 
 if ($app->getDao()->checkUserAlumno($username)){
@@ -16,7 +16,7 @@ if ($app->getDao()->checkUserAlumno($username)){
             <h5 class=\"card-header\">Contactar compañeros/as</h5>
             <div class=\"card-body\">
                 <p class=\"card-text\">Listado de exalumnos/as del centro donde se podrá contactar con ellos/as.</p>
-                <a href=\"#\" class=\"btn btn-primary\">Contactar</a>
+                <a href=\"contactAlumn.php\" class=\"btn btn-primary\">Contactar</a>
             </div>
         </div>
     </div>

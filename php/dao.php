@@ -166,7 +166,19 @@ class Dao
     function getEmpresas()
     {
         try {
-            $sql = "select ".COLUMN_EMPRESA_NOMBRE. ",".COLUMN_EMPRESA_DIRECCION. " from " .TABLE_EMPRESA;
+            $sql = "select ".COLUMN_EMPRESA_NOMBRE. ", ".COLUMN_EMPRESA_DIRECCION. " from " .TABLE_EMPRESA;
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
+    function getNombreApellidosEmailAlumnos()
+    {
+        try {
+            $sql = "select ".COLUMN_ALU_NOMBRE. ", ".COLUMN_ALU_APELLIDOS.  ", ".COLUMN_ALU_EMAIL. " from " .TABLE_ALUMNOS;
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -194,5 +206,7 @@ class Dao
         else
             return false;
     }
+
+
 }
 ?>
