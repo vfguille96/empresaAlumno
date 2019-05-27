@@ -211,6 +211,42 @@ class Dao
             return false;
     }
 
+    function sendEmail($remitente1, $destinatario1, $titulo1, $tipo1, $mensaje1)
+    {
+        try {
+/*            $remitente1 = 'vfguille@gmail.com';
+            //$destinatario1 = 'vfguille@gmail.com';
+            $fecha1 = '2019-10-11';
+            $titulo1 = 'wwwwwwwww';
+            $tipo1 = 'tipo';
+            $mensaje1 = 'sssssssssssss';*/
+            $sql = $this->conn->prepare("call sendEmail(?, ?, ?, ?, ?)");
+            $sql->bindParam(1, $remitente1);
+            $sql->bindParam(2, $destinatario1);
+            $sql->bindParam(3, $titulo1);
+            $sql->bindParam(4, $tipo1);
+            $sql->bindParam(5, $mensaje1);
+            $sql->execute();
+            return true;
+        } catch (PDOException $e) {
+            $this->error = "Error: " . $this->$e->getMessage();
+            echo $this->error;
+            return false;
+        }
+    }
+
+    function getEmailAlumno($username)
+    {
+        try {
+            $sql = "select " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where usuario = '" . $username . "'";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
 
 }
 

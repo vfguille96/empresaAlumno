@@ -54,7 +54,7 @@ if ($app->getDao()->checkUserEmpresa($username)){
         <div class=\"card\">
             <h5 class=\"card-header\">Listar correos empresa</h5>
             <div class=\"card-body\">
-                <p class=\"card-text\">Se mostrarán todos los correos que la empresa ha enviado.</p>
+                <p class=\"card-text\">Se mostrarán todos los correos que la empresa ha tipo.</p>
                 <a href=\"#\" class=\"btn btn-primary\">Listar</a>
             </div>
         </div>

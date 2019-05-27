@@ -8,6 +8,7 @@ echo '<div class="container">';
 echo '<p><h2 class="text-center">Contactar compañeros/as</h2></p>';
 $resulset = $app->getDao()->getNombreApellidosEmailAlumnos();
 $nombreApellidosEmail = $resulset->fetchAll();
+$usuario = $_SESSION['user'];
 
 ?>
     <div class="container">
@@ -23,7 +24,7 @@ $nombreApellidosEmail = $resulset->fetchAll();
                 // Hay datos que mostrar
                 try {
                     echo " <div class=\"form-group\">
-                    <label for=\"email\">Para: </label>";
+                    <label for=\"email\">Para:    <br></label><p>";
                     echo "<select class=\"selectpicker\" multiple data-actions-box=\"true\" data-width=\"fit\" id='destinatario' name='destinatario[]'>";
                     foreach ($nombreApellidosEmail as $item) {
                         echo "<option data-subtext=" . $item['nombre'] . '&nbsp;' . $item['apellidos'] . ">" . $item['email'] . "</option>";
@@ -69,16 +70,36 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }else
         $destinatarios = $_POST['destinatario'];
 
-
     $titulo = $_POST['titulo'];
     $mensaje = $_POST['mensaje'];
 
+    if (empty($titulo)){
+        echo "</br><div class=\"alert alert-danger\" role=\"alert\">
+            No se puede enviar un mensaje sin título.
+        </div>";
+    }elseif (empty($mensaje)){
+        echo "</br><div class=\"alert alert-danger\" role=\"alert\">
+            No se puede enviar un mensaje vacío.
+        </div>";
+    }else{
+        $remitente = $app->getDao()->getEmailAlumno($usuario);
+        $remitente2 = $remitente->fetch();
+        $envioOK =true;
+        $tipo = 'enviado';
 
+        foreach ($destinatarios as $destinatario) {
+            $envioOK = $app->getDao()->sendEmail($remitente2[0], $destinatario, $titulo, $tipo, $mensaje);
+        }
 
-
-
-
-
+        if ($envioOK){
+            //echo "<script language=\"javascript\">window.location.href=\"listEmailSended.php\"</script>";
+            echo "TO OKKKK";
+        }else{
+            echo "</br><div class=\"alert alert-danger\" role=\"alert\">
+            No se ha podido enviar el email correctamente.
+        </div>";
+        }
+    }
 }
 
 ?>
