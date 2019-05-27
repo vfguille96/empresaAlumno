@@ -24,7 +24,7 @@ $nombreApellidosEmail = $resulset->fetchAll();
                 try {
                     echo " <div class=\"form-group\">
                     <label for=\"email\">Para: </label>";
-                    echo "<select class=\"selectpicker\" multiple data-actions-box=\"true\" data-width=\"fit\" id='destinatario' name='destinatario'>";
+                    echo "<select class=\"selectpicker\" multiple data-actions-box=\"true\" data-width=\"fit\" id='destinatario' name='destinatario[]'>";
                     foreach ($nombreApellidosEmail as $item) {
                         echo "<option data-subtext=" . $item['nombre'] . '&nbsp;' . $item['apellidos'] . ">" . $item['email'] . "</option>";
                     }
@@ -59,5 +59,26 @@ $nombreApellidosEmail = $resulset->fetchAll();
 echo '</div>';
 $app->show_footer();
 
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    if (!isset($_POST['destinatario'])){
+        echo "</br><div class=\"alert alert-danger\" role=\"alert\">
+            No se ha seleccionado ningún destinatario.
+        </div>";
+    }else
+        $destinatarios = $_POST['destinatario'];
+
+
+    $titulo = $_POST['titulo'];
+    $mensaje = $_POST['mensaje'];
+
+
+
+
+
+
+
+}
 
 ?>
