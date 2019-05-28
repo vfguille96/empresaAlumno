@@ -40,7 +40,7 @@ else
             foreach ($listadoDeCorreosEnviadosYRecibidos as $item) {
                 if ($item['remitente'] == $emailAlumno[0] && $item['tipo'] != "empresa"){
                     echo "<tr class=\"table-danger\">";
-                        echo "<td><a href=detailsEmail.php/id=".$item['idCorreo'].">".$item['idCorreo']."</a></td>";
+                        echo "<td><a class=\"btn btn-primary\" href=detailsEmail.php?idCorreo=".$item['idCorreo'].">".$item['idCorreo']."</a></td>";
                         echo "<td> " .$item['fecha']. "</td>";
                         echo "<td> " .$item['destinatario']. "</td>";
                         echo "<td> " .strtoupper($item['tipo']). "</td>";
@@ -48,7 +48,7 @@ else
                     echo "</tr>";
                 }elseif ($item['destinatario'] == $emailAlumno[0] && $item['tipo'] != "empresa"){
                     echo "<tr class=\"table-success\">";
-                        echo "<td><a href=detailsEmail.php/id=".$item['idCorreo'].">".$item['idCorreo']."</a></td>";
+                        echo "<td><a class=\"btn btn-primary\" href=detailsEmail.php?idCorreo=".$item['idCorreo'].">".$item['idCorreo']."</a></td>";
                         echo "<td> " .$item['fecha']. "</td>";
                         echo "<td> " .$item['destinatario']. "</td>";
                         echo "<td>  RECIBIDO </td>";
@@ -56,7 +56,7 @@ else
                     echo "</tr>";
                 }else{
                     echo "<tr class=\"table-primary\">";
-                        echo "<td><a href=detailsEmail.php/id=".$item['idCorreo'].">".$item['idCorreo']."</a></td>";
+                        echo "<td><a class=\"btn btn-primary\" href=detailsEmail.php?idCorreo=".$item['idCorreo'].">".$item['idCorreo']."</a></td>";
                         echo "<td> " .$item['fecha']. "</td>";
                         echo "<td> " .$item['destinatario']. "</td>";
                         echo "<td> " .strtoupper($item['tipo']). "</td>";

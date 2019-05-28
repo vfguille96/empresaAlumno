@@ -265,6 +265,30 @@ class Dao
         }
     }
 
+    function getDetailsEmailID($idCorreo)
+    {
+        try {
+            $sql = "select " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_ASUNTO . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_CUERPO ." from " . TABLE_CORREO. " where idCorreo = " .$idCorreo;
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
+    function getEmailSendedEmpresa($username)
+    {
+        try {
+            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_ASUNTO ." from " . TABLE_CORREO." where ".COLUMN_CORREO_REMITENTE." = (select ".COLUMN_EMPRESA_EMAIL." from ".TABLE_EMPRESA." where usuario = '". $username."')";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
 
 }
 
