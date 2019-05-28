@@ -214,12 +214,6 @@ class Dao
     function sendEmail($remitente1, $destinatario1, $titulo1, $tipo1, $mensaje1)
     {
         try {
-/*            $remitente1 = 'vfguille@gmail.com';
-            //$destinatario1 = 'vfguille@gmail.com';
-            $fecha1 = '2019-10-11';
-            $titulo1 = 'wwwwwwwww';
-            $tipo1 = 'tipo';
-            $mensaje1 = 'sssssssssssss';*/
             $sql = $this->conn->prepare("call sendEmail(?, ?, ?, ?, ?)");
             $sql->bindParam(1, $remitente1);
             $sql->bindParam(2, $destinatario1);
@@ -239,6 +233,30 @@ class Dao
     {
         try {
             $sql = "select " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where usuario = '" . $username . "'";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
+    function getEmailSended($username)
+    {
+        try {
+            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_ASUNTO .", " . COLUMN_CORREO_CUERPO ." from " . TABLE_CORREO." where ".COLUMN_CORREO_REMITENTE." = (select ".COLUMN_ALU_EMAIL." from ".TABLE_ALUMNOS." where usuario = '". $username."')";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
+    function getEmailSendedAndReceived($username)
+    {
+        try {
+            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_REMITENTE .", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_TIPO .", " . COLUMN_CORREO_ASUNTO ." from " . TABLE_CORREO." where ".COLUMN_CORREO_DESTINATARIO." = (select ".COLUMN_ALU_EMAIL." from ".TABLE_ALUMNOS." where usuario = '". $username."') or ".COLUMN_CORREO_REMITENTE." = (select ".COLUMN_ALU_EMAIL." from ".TABLE_ALUMNOS." where usuario = '". $username."')";
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;

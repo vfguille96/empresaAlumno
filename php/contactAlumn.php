@@ -92,8 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
 
         if ($envioOK){
-            //echo "<script language=\"javascript\">window.location.href=\"listEmailSended.php\"</script>";
-            echo "TO OKKKK";
+            echo "<script language=\"javascript\">window.location.href=\"listEmailSended.php\"</script>";
         }else{
             echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No se ha podido enviar el email correctamente.

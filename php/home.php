@@ -26,7 +26,7 @@ if ($app->getDao()->checkUserAlumno($username)){
             <h5 class=\"card-header\">Listado de correos</h5>
             <div class=\"card-body\">
                 <p class=\"card-text\">Se muestran los correos enviados y recibidos.</p>
-                <a href=\"#\" class=\"btn btn-primary\">Listar</a>
+                <a href=\"listEmail.php\" class=\"btn btn-primary\">Listar</a>
             </div>
         </div>
     </div>

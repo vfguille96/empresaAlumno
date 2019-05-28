@@ -14,3 +14,11 @@ function showAlumno(){
     document.getElementById('div3').style.display = 'none';
     document.getElementById('div2').style.display = 'block';
 }
+
+function hideMensaje(){
+    document.getElementById('div3').style.display = 'none';
+}
+
+function showMensaje(){
+    document.getElementById('div3').style.display = 'block';
+}
