@@ -8,7 +8,7 @@ $app->show_head("Inicio de sesión");
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-md-4 offset-md-4 offset-col-3">
-                <h2 class="form-signin-heading text-center">Inicio de sesión</h2>
+                <br><br><h2 class="form-signin-heading text-center">Inicio de sesión</h2>
                 <form method="POST" action="<?= $_SERVER['PHP_SELF'];?>" class="form-signin">
                     <div class="form-group">
                         <label for="inputUser" class="col-form-label">Usuario</label>

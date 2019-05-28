@@ -4,7 +4,7 @@ $app = new App();
 $app->menu_register();
 $app->show_head_register("Registro");
 ?>
-    <h2 class="form-signin-heading text-center">Registro</h2>
+    <br><h2 class="form-signin-heading text-center">Registro</h2>
     <div class="container">
         <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
 

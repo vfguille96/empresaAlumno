@@ -241,6 +241,18 @@ class Dao
         }
     }
 
+    function getEmailEmpresa($username)
+    {
+        try {
+            $sql = "select " . COLUMN_ALU_EMAIL . " from " . TABLE_EMPRESA . " where usuario = '" . $username . "'";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
     function getEmailSended($username)
     {
         try {
@@ -289,7 +301,41 @@ class Dao
         }
     }
 
+    function getInfoAlumnosEmpresa($apellidos, $promocion)
+    {
+        try {
+            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", ". COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS. " where ".COLUMN_ALU_APELLIDOS." like '%".$apellidos."%' and ".COLUMN_ALU_PROMOCION." = '".$promocion."'";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
 
+    function getInfoAlumnosEmpresaApellidos($apellidos)
+    {
+        try {
+            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", ". COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS. " where ".COLUMN_ALU_APELLIDOS." like '%".$apellidos."%'";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
+
+    function getInfoAlumnosEmpresaPromo($promocion)
+    {
+        try {
+            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", ". COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS. " where ". COLUMN_ALU_PROMOCION." = '".$promocion."'";
+            $statement = $this->conn->prepare($sql);
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error en la conexion: " . $e->getMessage();
+        }
+    }
 }
 
 ?>

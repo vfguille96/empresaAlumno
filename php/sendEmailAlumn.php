@@ -6,35 +6,26 @@ $app->show_head("Contactar compañeros/as");
 $app->menu();
 echo '<div class="container">';
 echo '<p><h2 class="text-center">Contactar compañeros/as</h2></p>';
-$resulset = $app->getDao()->getNombreApellidosEmailAlumnos();
-$nombreApellidosEmail = $resulset->fetchAll();
 $usuario = $_SESSION['user'];
+if (isset($_GET['email']))
+    $_SESSION['emailAl'] = $_GET['email'];
+
+$emailAlumn = str_replace(' ', '+', $_SESSION['emailAl']);
 
 ?>
     <div class="container">
     <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
         <?php
-        if (!$resulset) {
-            echo '<p>Error en la base de datos</p>';
-        } else {
-            // No hay sectores en la dependencia
-            if (count($nombreApellidosEmail) == 0) {
-                echo '<p> No hay alumnos registrados.</p>';
-            } else {
-                // Hay datos que mostrar
+
                 try {
                     echo " <div class=\"form-group\">
                     <label for=\"email\">Para:    <br></label><p>";
-                    echo "<select class=\"selectpicker\" multiple data-actions-box=\"true\" data-width=\"fit\" id='destinatario' name='destinatario[]'>";
-                    foreach ($nombreApellidosEmail as $item) {
-                        echo "<option data-subtext=" . $item['nombre'] . '&nbsp;' . $item['apellidos'] . ">" . $item['email'] . "</option>";
-                    }
+                    echo "<select class=\"selectpicker\" data-width=\"fit\" id='destinatario' name='destinatario[]' disabled>";
+                        echo "<option selected>" . $emailAlumn . "</option>";
                     echo "</select>";
                     echo "</div>";
                 } catch (Exception $e) {
                     echo "<p>Error interno.</p>";
-                }
-            }
         }
         ?>
 
@@ -62,14 +53,6 @@ $app->show_footer();
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-    if (!isset($_POST['destinatario'])){
-        echo "</br><div class=\"alert alert-danger\" role=\"alert\">
-            No se ha seleccionado ningún destinatario.
-        </div>";
-    }else
-        $destinatarios = $_POST['destinatario'];
-
     $titulo = $_POST['titulo'];
     $mensaje = $_POST['mensaje'];
 
@@ -77,27 +60,32 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No se puede enviar un mensaje sin título.
         </div>";
+
+        echo "<script language=\"javascript\">window.location.href=\"searchAlumn.php\"</script>";
+
     }elseif (empty($mensaje)){
         echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No se puede enviar un mensaje vacío.
         </div>";
+
+        echo "<script language=\"javascript\">window.location.href=\"searchAlumn.php\"</script>";
     }else{
-        $remitente = $app->getDao()->getEmailAlumno($usuario);
+        $remitente = $app->getDao()->getEmailEmpresa($usuario);
         $remitente2 = $remitente->fetch();
         $envioOK =true;
-        $tipo = 'enviado';
+        $tipo = 'empresa';
 
-        foreach ($destinatarios as $destinatario) {
-            $envioOK = $app->getDao()->sendEmail($remitente2[0], $destinatario, $titulo, $tipo, $mensaje);
-        }
+        $envioOK = $app->getDao()->sendEmail($remitente2[0], $emailAlumn, $titulo, $tipo, $mensaje);
 
         if ($envioOK){
-            echo "<script language=\"javascript\">window.location.href=\"listEmailSended.php\"</script>";
+            echo "<script language=\"javascript\">window.location.href=\"listEmailsEmpresa.php\"</script>";
         }else{
             echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No se ha podido enviar el email correctamente.
         </div>";
+            echo "<script language=\"javascript\">window.location.href=\"searchAlumn.php\"</script>";
         }
     }
 }
+
 ?>

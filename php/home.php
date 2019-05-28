@@ -65,7 +65,7 @@ if ($app->getDao()->checkUserEmpresa($username)){
             <h5 class=\"card-header\">Buscar alumnos/as</h5>
             <div class=\"card-body\">
                 <p class=\"card-text\">Se filtrará los alumnos por nombre, apellidos y año de promoción.</p>
-                <a href=\"#\" class=\"btn btn-primary\">Buscar</a>
+                <a href=\"searchAlumn.php\" class=\"btn btn-primary\">Buscar</a>
             </div>
         </div>
     </div>

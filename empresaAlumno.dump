@@ -1,0 +1,146 @@
+-- MySQL dump 10.16  Distrib 10.1.38-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: empresaAlumno
+-- ------------------------------------------------------
+-- Server version	10.1.38-MariaDB-0ubuntu0.18.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `alumnos`
+--
+
+DROP TABLE IF EXISTS `alumnos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alumnos` (
+  `nombre` varchar(150) NOT NULL,
+  `apellidos` varchar(255) NOT NULL,
+  `promocion` year(4) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `nombreEmpresa` varchar(255) DEFAULT NULL,
+  `desdeEmpresa` varchar(255) DEFAULT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `clave` varchar(40) NOT NULL,
+  PRIMARY KEY (`usuario`),
+  UNIQUE KEY `email` (`email`),
+  KEY `usuario` (`usuario`,`clave`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alumnos`
+--
+
+LOCK TABLES `alumnos` WRITE;
+/*!40000 ALTER TABLE `alumnos` DISABLE KEYS */;
+INSERT INTO `alumnos` VALUES ('Guillermo','Fernández',1901,'vfguille@gmail.com',1,NULL,NULL,'adafs','70c881d4a26984ddce795f6f71817c9cf4480e79'),('Alberto','Vera Fernández',1904,'vfguille+2@gmail.com',1,NULL,NULL,'usuario1','70c881d4a26984ddce795f6f71817c9cf4480e79');
+/*!40000 ALTER TABLE `alumnos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `correo`
+--
+
+DROP TABLE IF EXISTS `correo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `correo` (
+  `idCorreo` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `remitente` varchar(150) NOT NULL,
+  `destinatario` varchar(100) NOT NULL,
+  `fecha` date NOT NULL,
+  `asunto` varchar(100) NOT NULL,
+  `tipo` enum('enviado','recibido','empresa','') NOT NULL,
+  `cuerpo` longtext NOT NULL,
+  PRIMARY KEY (`idCorreo`,`remitente`,`destinatario`) USING BTREE,
+  KEY `remitente` (`remitente`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `correo`
+--
+
+LOCK TABLES `correo` WRITE;
+/*!40000 ALTER TABLE `correo` DISABLE KEYS */;
+INSERT INTO `correo` VALUES (1,'vfguille@gmail.com','vfguille@gmail.com','2019-05-28','qqq','enviado','qq'),(2,'vfguille@gmail.com','vfguille+2@gmail.com','2019-05-28','qqq','enviado','qq'),(3,'vfguille@gmail.com','vfguille@gmail.com','2019-05-28','rrr','enviado','rrr'),(4,'vfguille@gmail.com','vfguille@gmail.com','2019-05-28','nnn','enviado','nnn'),(6,'vfguille+empreesa@gmail.com','vfguille+2@gmail.com','2019-05-28','correo desde empresa','empresa','cuerpo mensaje'),(7,'vfguille+empreesa@gmail.com','vfguille@gmail.com','2019-05-28','correo desde empresa','empresa','cuerpo mensaje'),(8,'vfguille+2@gmail.com','vfguille@gmail.com','2019-05-28','correo desde usuario','enviado','cuerpo mensaje'),(9,'vfguille+empreesa@gmail.com','vfguille@gmail.com','2019-05-28','wwwwwwwwww','empresa','ddddddddddddddd'),(10,'vfguille+empreesa@gmail.com','vfguille@gmail.com','2019-05-28','fin','empresa','fin delfín.'),(11,'vfguille+empreesa@gmail.com','vfguille 2@gmail.com','2019-05-28','aaa','empresa','v'),(12,'vfguille+empreesa@gmail.com','vfguille+2@gmail.com','2019-05-28','j','empresa','jjj');
+/*!40000 ALTER TABLE `correo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empresa`
+--
+
+DROP TABLE IF EXISTS `empresa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empresa` (
+  `nombre` varchar(100) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `telefono` char(9) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `nombreContacto` varchar(150) NOT NULL,
+  `usuario` varchar(150) NOT NULL,
+  `clave` varchar(40) NOT NULL,
+  PRIMARY KEY (`usuario`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `telefono` (`telefono`),
+  KEY `usuario` (`usuario`,`clave`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empresa`
+--
+
+LOCK TABLES `empresa` WRITE;
+/*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
+INSERT INTO `empresa` VALUES ('Sr.232423','C/ Mar Jónico, 1523r2','626833686','vfguille312fewz@gmail.com','Guillermo Vera Fernández2323','asddffff','70c881d4a26984ddce795f6f71817c9cf4480e79'),('Sr.asds','C/ Mar Jónico, 15','626892861','vfguille@gmail.com','Guillermo Vera Fernández','dffhbnmnkkk','70c881d4a26984ddce795f6f71817c9cf4480e79'),('324235ewferhgrth','yrhjtyj6j','626896855','vfguill1431e@gmail.com','Guillermo Vera Fernández n','mjyb','70c881d4a26984ddce795f6f71817c9cf4480e79'),('AirZone','Mar Jónico, 15','626826861','vfguille+empreesa@gmail.com','Guillermo Vera Fernández','root','40bd001563085fc35165329ea1ff5c5ecbdbbeef'),('Sr.','C/ Mar Jónico, 15','626296861','vfguille100r55h@gmail.com','Guillermo Vera Fernández','wasnb','70c881d4a26984ddce795f6f71817c9cf4480e79');
+/*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'empresaAlumno'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `sendEmail` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sendEmail`(remitente varchar(255), destinatario varchar(255), titulo varchar(255), tipo varchar(255), mensaje varchar(255))
+    COMMENT 'Procedicimiento que envia un email.'
+begin
+	INSERT INTO correo (remitente, destinatario, fecha, asunto, tipo, cuerpo) VALUES (remitente, destinatario, date(now()), titulo, tipo, mensaje);
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-05-28 19:57:08

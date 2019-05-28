@@ -152,6 +152,12 @@ class App
             $this->showLogin();
         }
     }
+
+
+    function getEmail($value){
+        $email = $value;
+        return $email;
+    }
 }
 
 ?>
