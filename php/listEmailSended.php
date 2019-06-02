@@ -12,48 +12,44 @@ $listadoDeCorreosEnviados = $resulset->fetchAll();
 
 if (!$resulset) {
     echo '<p>Error en la base de datos</p>';
-}
-else
-{
+} else {
     // No hay sectores en la dependencia
     if (count($listadoDeCorreosEnviados) == 0) {
         echo '<p> No hay correos enviados.</p>';
-    }
-    else {
+    } else {
         // Hay datos que mostrar
         try {
             ?>
             <input type="radio" name="radio" onclick="showMensaje();" checked="checked"/>
             Visible
 
-            <input type="radio" name="radio" onclick="hideMensaje();" />
+            <input type="radio" name="radio" onclick="hideMensaje();"/>
             No visible
 
-        
-           <table class="table table-bordered table-striped" id='listEmailS'>
 
-            <thead class="thead-default">
-            <tr> 
-                <th> idCorreo </th> 
-                <th> Fecha </th>
-                <th> Destinatario </th> 
-                <th> Asunto </th> 
-                <th id="div3" class="hide"> Mensaje </th>
-            </tr> 
-            </thead>
-<?php
+            <table class="table table-bordered table-striped" id='listEmailS'>
+
+                <thead class="thead-default">
+                <tr>
+                    <th> idCorreo</th>
+                    <th> Fecha</th>
+                    <th> Destinatario</th>
+                    <th> Asunto</th>
+                    <th id="div3" class="hide"> Mensaje</th>
+                </tr>
+                </thead>
+            <?php
             foreach ($listadoDeCorreosEnviados as $item) {
                 echo "<tr>";
-                    echo "<td> " .$item['idCorreo']. "</td>";
-                    echo "<td> " .$item['fecha']. "</td>";
-                    echo "<td> " .$item['destinatario']. "</td>";
-                    echo "<td> " .$item['asunto']. "</td>";
-                    echo "<div id=\"div3\" class=\"hide\"><td> " .$item['cuerpo']. "</td></div>";
+                echo "<td> " . $item['idCorreo'] . "</td>";
+                echo "<td> " . $item['fecha'] . "</td>";
+                echo "<td> " . $item['destinatario'] . "</td>";
+                echo "<td> " . $item['asunto'] . "</td>";
+                echo "<div id=\"div3\" class=\"hide\"><td> " . $item['cuerpo'] . "</td></div>";
                 echo "</tr>";
             }
             echo "</table>";
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo "<p>Error interno.</p>";
         }
     }

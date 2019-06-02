@@ -256,7 +256,7 @@ class Dao
     function getEmailSended($username)
     {
         try {
-            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_ASUNTO .", " . COLUMN_CORREO_CUERPO ." from " . TABLE_CORREO." where ".COLUMN_CORREO_REMITENTE." = (select ".COLUMN_ALU_EMAIL." from ".TABLE_ALUMNOS." where usuario = '". $username."')";
+            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_ASUNTO . ", " . COLUMN_CORREO_CUERPO . " from " . TABLE_CORREO . " where " . COLUMN_CORREO_REMITENTE . " = (select " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where usuario = '" . $username . "')";
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -268,7 +268,7 @@ class Dao
     function getEmailSendedAndReceived($username)
     {
         try {
-            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_REMITENTE .", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_TIPO .", " . COLUMN_CORREO_ASUNTO ." from " . TABLE_CORREO." where ".COLUMN_CORREO_DESTINATARIO." = (select ".COLUMN_ALU_EMAIL." from ".TABLE_ALUMNOS." where usuario = '". $username."') or ".COLUMN_CORREO_REMITENTE." = (select ".COLUMN_ALU_EMAIL." from ".TABLE_ALUMNOS." where usuario = '". $username."')";
+            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_REMITENTE . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_TIPO . ", " . COLUMN_CORREO_ASUNTO . " from " . TABLE_CORREO . " where " . COLUMN_CORREO_DESTINATARIO . " = (select " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where usuario = '" . $username . "') or " . COLUMN_CORREO_REMITENTE . " = (select " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where usuario = '" . $username . "')";
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -280,7 +280,7 @@ class Dao
     function getDetailsEmailID($idCorreo)
     {
         try {
-            $sql = "select " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_ASUNTO . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_CUERPO ." from " . TABLE_CORREO. " where idCorreo = " .$idCorreo;
+            $sql = "select " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_ASUNTO . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_CUERPO . " from " . TABLE_CORREO . " where idCorreo = " . $idCorreo;
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -292,7 +292,7 @@ class Dao
     function getEmailSendedEmpresa($username)
     {
         try {
-            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_ASUNTO ." from " . TABLE_CORREO." where ".COLUMN_CORREO_REMITENTE." = (select ".COLUMN_EMPRESA_EMAIL." from ".TABLE_EMPRESA." where usuario = '". $username."')";
+            $sql = "select " . COLUMN_CORREO_IDCORREO . ", " . COLUMN_CORREO_FECHA . ", " . COLUMN_CORREO_DESTINATARIO . ", " . COLUMN_CORREO_ASUNTO . " from " . TABLE_CORREO . " where " . COLUMN_CORREO_REMITENTE . " = (select " . COLUMN_EMPRESA_EMAIL . " from " . TABLE_EMPRESA . " where usuario = '" . $username . "')";
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -304,7 +304,7 @@ class Dao
     function getInfoAlumnosEmpresa($apellidos, $promocion)
     {
         try {
-            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", ". COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS. " where ".COLUMN_ALU_APELLIDOS." like '%".$apellidos."%' and ".COLUMN_ALU_PROMOCION." = '".$promocion."'";
+            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where " . COLUMN_ALU_APELLIDOS . " like '%" . $apellidos . "%' and " . COLUMN_ALU_PROMOCION . " = '" . $promocion . "'";
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -316,7 +316,7 @@ class Dao
     function getInfoAlumnosEmpresaApellidos($apellidos)
     {
         try {
-            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", ". COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS. " where ".COLUMN_ALU_APELLIDOS." like '%".$apellidos."%'";
+            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where " . COLUMN_ALU_APELLIDOS . " like '%" . $apellidos . "%'";
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;
@@ -328,7 +328,7 @@ class Dao
     function getInfoAlumnosEmpresaPromo($promocion)
     {
         try {
-            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", ". COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS. " where ". COLUMN_ALU_PROMOCION." = '".$promocion."'";
+            $sql = "select " . COLUMN_ALU_NOMBRE . ", " . COLUMN_ALU_APELLIDOS . ", " . COLUMN_ALU_PROMOCION . ", " . COLUMN_ALU_EMAIL . " from " . TABLE_ALUMNOS . " where " . COLUMN_ALU_PROMOCION . " = '" . $promocion . "'";
             $statement = $this->conn->prepare($sql);
             $statement->execute();
             return $statement;

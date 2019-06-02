@@ -12,19 +12,14 @@ $emails = $resulset->fetchAll();
 
 if (!$resulset) {
     echo '<p>Error en la base de datos</p>';
-}
-else
-{
+} else {
     // No hay sectores en la dependencia
     if (count($emails) == 0) {
         echo '<p> No hay correos a mostrar.</p>';
-    }
-    else {
+    } else {
         // Hay datos que mostrar
         try {
-            echo "
-        
-            <table class=\"table table-bordered table-striped\">";
+            echo "<table class=\"table table-bordered table-striped\">";
 
             echo "<thead class=\"thead-default\"> 
             <tr> 
@@ -37,15 +32,14 @@ else
 
             foreach ($emails as $item) {
                 echo "<tr class=\"table-primary\">";
-                echo "<td><a class=\"btn btn-primary\" href=detailsEmail.php?idCorreo=".$item['idCorreo'].">".$item['idCorreo']."</a></td>";
-                echo "<td> " .$item['fecha']. "</td>";
-                echo "<td> " .$item['destinatario']. "</td>";
-                echo "<td> " .$item['asunto']. "</td>";
+                echo "<td><a class=\"btn btn-primary\" href=detailsEmail.php?idCorreo=" . $item['idCorreo'] . ">" . $item['idCorreo'] . "</a></td>";
+                echo "<td> " . $item['fecha'] . "</td>";
+                echo "<td> " . $item['destinatario'] . "</td>";
+                echo "<td> " . $item['asunto'] . "</td>";
                 echo "</tr>";
             }
             echo "</table>";
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo "<p>Error interno.</p>";
         }
     }

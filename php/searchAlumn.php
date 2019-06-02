@@ -9,7 +9,7 @@ echo '<p><h2 class="text-center">Buscar alumnos/as</h2></p>';
 ?>
 
 
-<div class="container">
+    <div class="container">
     <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
 
         <div class="form-group">
@@ -26,7 +26,8 @@ echo '<p><h2 class="text-center">Buscar alumnos/as</h2></p>';
         <p></p>
 
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Buscar</button><br><br>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+            <br><br>
         </div>
     </form>
 
@@ -36,22 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $promocion = $_POST['promocion'];
     $apellidos = $_POST['apellidos'];
 
-    if (empty($apellidos) && !empty($promocion)){
+    if (empty($apellidos) && !empty($promocion)) {
         $resulset = $app->getDao()->getInfoAlumnosEmpresaPromo($promocion);
         $nombreApellidosEmail = $resulset->fetchAll();
 
         if (!$resulset) {
             echo '<p>Error en la base de datos</p>';
-        }
-        else
-        {
+        } else {
             // No hay sectores en la dependencia
             if (count($nombreApellidosEmail) == 0) {
                 echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No hay alumnos a mostrar.
         </div>";
-            }
-            else {
+            } else {
                 // Hay datos que mostrar
                 try {
                     echo "
@@ -68,38 +66,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                     foreach ($nombreApellidosEmail as $item) {
                         echo "<tr class=\"table-primary\">";
-                            echo "<td> " .$item['nombre']. "</td>";
-                            echo "<td> " .$item['apellidos']. "</td>";
-                            echo "<td> " .$item['promocion']. "</td>";
-                            echo "<td><a class=\"btn btn-primary\" href=sendEmailAlumn.php?email=".$item['email'].">".$item['email']."</a></td>";
+                        echo "<td> " . $item['nombre'] . "</td>";
+                        echo "<td> " . $item['apellidos'] . "</td>";
+                        echo "<td> " . $item['promocion'] . "</td>";
+                        echo "<td><a class=\"btn btn-primary\" href=sendEmailAlumn.php?email=" . $item['email'] . ">" . $item['email'] . "</a></td>";
                         echo "</tr>";
                     }
 
                     echo "</table>";
-                }
-                catch (Exception $e) {
+                } catch (Exception $e) {
                     echo "<p>Error interno.</p>";
                 }
             }
         }
 
-
-    }elseif (empty($promocion) && !empty($apellidos)){
+    } elseif (empty($promocion) && !empty($apellidos)) {
         $resulset = $app->getDao()->getInfoAlumnosEmpresaApellidos($apellidos);
         $nombreApellidosEmail = $resulset->fetchAll();
 
         if (!$resulset) {
             echo '<p>Error en la base de datos</p>';
-        }
-        else
-        {
+        } else {
             // No hay sectores en la dependencia
             if (count($nombreApellidosEmail) == 0) {
                 echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No hay alumnos a mostrar.
         </div>";
-            }
-            else {
+            } else {
                 // Hay datos que mostrar
                 try {
                     echo "
@@ -116,38 +109,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                     foreach ($nombreApellidosEmail as $item) {
                         echo "<tr class=\"table-primary\">";
-                        echo "<td> " .$item['nombre']. "</td>";
-                        echo "<td> " .$item['apellidos']. "</td>";
-                        echo "<td> " .$item['promocion']. "</td>";
-                        echo "<td><a class=\"btn btn-primary\" href=sendEmailAlumn.php?email=".$item['email'].">".$item['email']."</a></td>";
+                        echo "<td> " . $item['nombre'] . "</td>";
+                        echo "<td> " . $item['apellidos'] . "</td>";
+                        echo "<td> " . $item['promocion'] . "</td>";
+                        echo "<td><a class=\"btn btn-primary\" href=sendEmailAlumn.php?email=" . $item['email'] . ">" . $item['email'] . "</a></td>";
                         echo "</tr>";
                     }
                     echo "</table>";
-                }
-                catch (Exception $e) {
+                } catch (Exception $e) {
                     echo "<p>Error interno.</p>";
                 }
             }
         }
 
 
-    }
-    elseif (!empty($promocion) && !empty($apellidos)){
+    } elseif (!empty($promocion) && !empty($apellidos)) {
         $resulset = $app->getDao()->getInfoAlumnosEmpresa($apellidos, $promocion);
         $nombreApellidosEmail = $resulset->fetchAll();
 
         if (!$resulset) {
             echo '<p>Error en la base de datos</p>';
-        }
-        else
-        {
+        } else {
             // No hay sectores en la dependencia
             if (count($nombreApellidosEmail) == 0) {
                 echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No hay alumnos a mostrar.
         </div>";
-            }
-            else {
+            } else {
                 // Hay datos que mostrar
                 try {
                     echo "
@@ -164,20 +152,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                     foreach ($nombreApellidosEmail as $item) {
                         echo "<tr class=\"table-primary\">";
-                        echo "<td> " .$item['nombre']. "</td>";
-                        echo "<td> " .$item['apellidos']. "</td>";
-                        echo "<td> " .$item['promocion']. "</td>";
-                        echo "<td><a class=\"btn btn-primary\" href=sendEmailAlumn.php?email=".$item['email'].">".$item['email']."</a></td>";
+                        echo "<td> " . $item['nombre'] . "</td>";
+                        echo "<td> " . $item['apellidos'] . "</td>";
+                        echo "<td> " . $item['promocion'] . "</td>";
+                        echo "<td><a class=\"btn btn-primary\" href=sendEmailAlumn.php?email=" . $item['email'] . ">" . $item['email'] . "</a></td>";
                         echo "</tr>";
                     }
                     echo "</table>";
-                }
-                catch (Exception $e) {
+                } catch (Exception $e) {
                     echo "<p>Error interno.</p>";
                 }
             }
         }
-    } else{
+    } else {
         echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             Inserte algún parámetro de búsqueda.
         </div>";

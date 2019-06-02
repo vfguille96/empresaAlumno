@@ -11,14 +11,11 @@ $empresas = $resulset->fetchAll();
 
 if (!$resulset) {
     echo '<p>Error en la base de datos</p>';
-}
-else
-{
+} else {
     // No hay sectores en la dependencia
     if (count($empresas) == 0) {
         echo '<p> No hay empresas registradas.</p>';
-    }
-    else {
+    } else {
         // Hay datos que mostrar
         try {
             echo "
@@ -33,12 +30,11 @@ else
             </thead>";
 
             foreach ($empresas as $item) {
-                echo "<tr> <td> " .$item['nombre']. "</td>";
-                echo " <td> " .$item['direccion']. "</td></tr>";
+                echo "<tr> <td> " . $item['nombre'] . "</td>";
+                echo " <td> " . $item['direccion'] . "</td></tr>";
             }
             echo "</table>";
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo "<p>Error interno.</p>";
         }
     }

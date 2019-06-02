@@ -17,15 +17,15 @@ $emailAlumn = str_replace(' ', '+', $_SESSION['emailAl']);
     <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
         <?php
 
-                try {
-                    echo " <div class=\"form-group\">
+        try {
+            echo "<div class=\"form-group\">
                     <label for=\"email\">Para:    <br></label><p>";
-                    echo "<select class=\"selectpicker\" data-width=\"fit\" id='destinatario' name='destinatario[]' disabled>";
-                        echo "<option selected>" . $emailAlumn . "</option>";
-                    echo "</select>";
-                    echo "</div>";
-                } catch (Exception $e) {
-                    echo "<p>Error interno.</p>";
+            echo "<select class=\"selectpicker\" data-width=\"fit\" id='destinatario' name='destinatario[]' disabled>";
+            echo "<option selected>" . $emailAlumn . "</option>";
+            echo "</select>";
+            echo "</div>";
+        } catch (Exception $e) {
+            echo "<p>Error interno.</p>";
         }
         ?>
 
@@ -56,30 +56,30 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $titulo = $_POST['titulo'];
     $mensaje = $_POST['mensaje'];
 
-    if (empty($titulo)){
+    if (empty($titulo)) {
         echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No se puede enviar un mensaje sin título.
         </div>";
 
         echo "<script language=\"javascript\">window.location.href=\"searchAlumn.php\"</script>";
 
-    }elseif (empty($mensaje)){
+    } elseif (empty($mensaje)) {
         echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No se puede enviar un mensaje vacío.
         </div>";
 
         echo "<script language=\"javascript\">window.location.href=\"searchAlumn.php\"</script>";
-    }else{
+    } else {
         $remitente = $app->getDao()->getEmailEmpresa($usuario);
         $remitente2 = $remitente->fetch();
-        $envioOK =true;
+        $envioOK = true;
         $tipo = 'empresa';
 
         $envioOK = $app->getDao()->sendEmail($remitente2[0], $emailAlumn, $titulo, $tipo, $mensaje);
 
-        if ($envioOK){
+        if ($envioOK) {
             echo "<script language=\"javascript\">window.location.href=\"listEmailsEmpresa.php\"</script>";
-        }else{
+        } else {
             echo "</br><div class=\"alert alert-danger\" role=\"alert\">
             No se ha podido enviar el email correctamente.
         </div>";
@@ -87,5 +87,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 }
-
 ?>

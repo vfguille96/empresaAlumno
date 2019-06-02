@@ -5,24 +5,24 @@ $app->validateSession();
 $app->show_head("Detalles del email");
 $app->menu();
 if (isset($_GET['idCorreo']))
-    $idCorreo= $_GET['idCorreo'];
+    $idCorreo = $_GET['idCorreo'];
 $statement = $app->getDao()->getDetailsEmailID($idCorreo);
 $detailsEmail = $statement->fetchAll();
 
 echo '<div class="container">';
-echo '<p><h2 class="text-center">Detalles del email ID: '.$idCorreo.'</h2></p>';
+echo '<p><h2 class="text-center">Detalles del email ID: ' . $idCorreo . '</h2></p>';
 
-foreach ($detailsEmail as $item){
-echo "    <div class=\"card text-center\">
+foreach ($detailsEmail as $item) {
+    echo "    <div class=\"card text-center\">
     <div class=\"card-header\">
-    ".$item['destinatario']."
+    " . $item['destinatario'] . "
     </div>
     <div class=\"card-body\">
-        <h5 class=\"card-title\">".$item['asunto']."</h5>
-        <p class=\"card-text\">".$item['cuerpo']."</p>
+        <h5 class=\"card-title\">" . $item['asunto'] . "</h5>
+        <p class=\"card-text\">" . $item['cuerpo'] . "</p>
     </div>
     <div class=\"card-footer text-muted\">
-    ".$item['fecha']."
+    " . $item['fecha'] . "
     </div>
 </div>";
 

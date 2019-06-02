@@ -8,7 +8,7 @@ $username = $_SESSION['user'];
 echo '</br>';
 echo '<h2 class="text-center">Bienvenido, ' . $username . '.</h2>';
 
-if ($app->getDao()->checkUserAlumno($username)){
+if ($app->getDao()->checkUserAlumno($username)) {
     echo "</br>
 <div class=\"row justify-content-center\">
     <div class=\"col-sm-5\">
@@ -46,7 +46,7 @@ if ($app->getDao()->checkUserAlumno($username)){
 </div>";
 }
 
-if ($app->getDao()->checkUserEmpresa($username)){
+if ($app->getDao()->checkUserEmpresa($username)) {
     echo "<!-- EMPRESA -->
 </br>
 <div class=\"row justify-content-center\">
